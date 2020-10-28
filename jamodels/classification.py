@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 
 class MainClassifiers(object):
 
-    def __init__(self, dataset, target):
+    def __init__(self, dataset, target, hypertune):
         self.dataset = dataset
         self.target = target
         self.features = [i for i in list(dataset.columns) if i!= target]
@@ -18,6 +18,7 @@ class MainClassifiers(object):
         self.y_test = None
 
         self.model = None
+        self.hypertune = hypertune
 
     def splitting(self):
         X = dataset[self.features]

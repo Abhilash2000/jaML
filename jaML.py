@@ -27,8 +27,8 @@ class jaML(object):
         st.markdown(self.hide_menu_style, unsafe_allow_html=True)
         
         st.sidebar.title('Sections')
-        page = st.sidebar.radio("Go To Page",['Homepage', 'Data View', 'EDA', 'Model Training'])
-        data = st.file_uploader('Upload Your Dataset', type = 'csv')
+        page = st.sidebar.radio("Go To Page",['Homepage', 'Data View', 'EDA', 'Model Training', 'Test CSV Prediction'])
+        data = st.file_uploader('Upload Your Dataset', type = 'csv', key = 'Train')
 
         if data == None:
             pass
@@ -36,6 +36,9 @@ class jaML(object):
             df = st.cache(pd.read_csv)(data)
 
             if page == 'Homepage':
+                st.sidebar.title('Uploaded Wrong File?')
+                st.sidebar.info("You Will Have To Refresh The Page To Re-Upload")
+
                 st.title("Welcome To The jaML App!")
                 st.write("The Purpose Of This App Is To Simplify The EDA Process With Just The Click Of The Mouse.")
                 st.write("The jaML App Has A Lot Of Features That Can Be Used For EDA.")
@@ -62,6 +65,18 @@ class jaML(object):
                 st.write("6. Countplot")
                 st.write("7. Correlation Heatmap")
                 st.write("8. Selection Plot")
+                st.write("")
+                st.write("")
+
+                st.subheader("You Can Train Your Own ML Model")
+                st.write("")
+                st.write("The Different Types Of Models You Can Generate Are - ")
+                st.write("1. Linear Regression")
+                st.write("2. Logistic Regression")
+                st.write("3. Decision Tree Classifier/Regressor")
+                st.write("4. Random Forest Classifier/Regressor")
+                st.write("")
+                st.write("You Can, Also, Choose To Hyper Tune The Model")
                 st.write("")
                 st.write("")
 
@@ -161,6 +176,9 @@ class jaML(object):
                     viz.visualize_distribution(df, x_axis)
 
             elif page == 'Model Training':
+                st.sidebar.title('What To Do?')
+                st.sidebar.info("You Can Select Your Target And Train A Model On Your Dataset")
+
                 st.title("Model Training")
                 st.subheader("Here You Can Train A Model On Uploaded Train Data-Set")
                 display = st.selectbox("Choose What Type Of Training You Want To Do", 
@@ -173,9 +191,21 @@ class jaML(object):
                                         index = 0)
 
                     target = st.selectbox("Select Target Column", 
-                                        df.columns,
-                                        index = len(df.columns)-1)
-                                    
+                                          df.columns,
+                                          index = len(df.columns)-1)
+
+                    hypertune = st.selectbox("Do You Want To Hyper Tune The Model?", 
+                                             ['Yes', 'No'],
+                                             index = 1)
+
+            elif page == 'Test CSV Prediction':
+                data = st.file_uploader('Upload Your Test Dataset', type = 'csv', key = 'Test')
+
+                if data == None:
+                    pass
+                else:
+                    df = st.cache(pd.read_csv)(data)
+                                            
                     
 
 jaml = jaML()

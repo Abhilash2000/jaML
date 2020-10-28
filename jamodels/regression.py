@@ -8,7 +8,7 @@ from sklearn.metrics import r2_score, mean_squared_error
 
 class MainRegressor(object):
 
-    def __init__(self, dataset, target):
+    def __init__(self, dataset, target, hypertune):
         self.dataset = dataset
         self.target = target
         self.features = [i for i in list(dataset.columns) if i!= target]
@@ -19,6 +19,7 @@ class MainRegressor(object):
         self.y_test = None
 
         self.model = None
+        self.hypertune = hypertune
 
     def splitting(self):
         X = dataset[self.features]
