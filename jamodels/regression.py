@@ -53,22 +53,22 @@ class MainRegressor(object):
         pred = self.model.predict(X_test)
         return (mean_squared_error(y_test, pred), r2_score(y_test, pred))
 
-    def decisionTree(self):
+    def decision_tree(self):
         self.splitting()
 
         self.model = DecisionTreeRegressor()
         self.model.fit(self.X_train, self.y_train)
 
-    def decisionTree_score(self):
+    def decision_tree_score(self):
         pred = self.model.predict(X_test)
         return (mean_squared_error(y_test, pred), r2_score(y_test, pred))
 
-    def randomForest(self):
+    def random_forest(self):
         self.splitting()
 
         self.model = RandomForestRegressor()
         self.model.fit(self.X_train, self.y_train)
 
-    def randomForest_score(self):
+    def random_forest_score(self):
         pred = self.model.predict(X_test)
         return (mean_squared_error(y_test, pred), r2_score(y_test, pred))

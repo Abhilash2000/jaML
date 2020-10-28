@@ -194,9 +194,15 @@ class jaML(object):
                                           df.columns,
                                           index = len(df.columns)-1)
 
-                    hypertune = st.selectbox("Do You Want To Hyper Tune The Model?", 
-                                             ['Yes', 'No'],
-                                             index = 1)
+                    if model != 'Linear Regression': 
+                        hypertune = st.selectbox("Do You Want To Hyper Tune The Model?", 
+                                                ['Yes', 'No'],
+                                                index = 1)
+
+                        if hypertune == 'Yes':
+                            kind = st.selectbox("What Kind Of Hyper Tuning?", 
+                                                ['RandomizedSearchCV', 'GridSearchCV'],
+                                                index = 1)
 
             elif page == 'Test CSV Prediction':
                 data = st.file_uploader('Upload Your Test Dataset', type = 'csv', key = 'Test')
