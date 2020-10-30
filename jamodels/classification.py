@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+import random as rd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -86,8 +88,8 @@ class MainClassifiers(object):
             self.model.fit(self.X_train, self.y_train)
         else:
             param_grid = {"max_depth": [3, None], 
-                          "max_features": randint(1, 9), 
-                          "min_samples_leaf": randint(1, 9), 
+                          "max_features": rd.randint(1, 9), 
+                          "min_samples_leaf": rd.randint(1, 9), 
                           "criterion": ["gini", "entropy"]
                           } 
 

@@ -1,14 +1,15 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
-
+from sklearn.model_selection import GridSearchCV,RandomizedSearchCV
 from sklearn.metrics import r2_score, mean_squared_error
 
 class MainRegressors(object):
 
-    def __init__(self, dataset, target, hypertune):
+    def __init__(self, dataset, target, hypertune,kind):
         self.dataset = dataset
         self.target = target
         self.features = [i for i in list(dataset.columns) if i!= target]
@@ -20,6 +21,7 @@ class MainRegressors(object):
 
         self.model = None
         self.hypertune = hypertune
+        self.kind = kind
 
     def splitting(self):
         X = self.dataset[self.features]
@@ -46,8 +48,19 @@ class MainRegressors(object):
     def logistic_regression(self):
         self.splitting()
 
-        self.model = LogisticRegression()
-        self.model.fit(self.X_train, self.y_train)
+        if self.hypertune == 'No':
+            self.model = LogisticRegression()
+            self.model.fit(self.X_train, self.y_train)
+        else:
+            c_space = np.logspace(-5,8,15)
+            param_grid = {'C': c_space}
+
+            if self.kind == 'GridSearchCV':
+                self.model = GridSearchCV(LogisticRegression(),param_grid, cv = 5, verbose = 0)
+                self.model.fit(self.X_train, self.y_train)
+            else:
+                self.model = RandomizedSearchCV(LogisticRegression(),param_grid, cv = 5, verbose = 0)
+                self.model.fit(self.X_train, self.y_train)
 
     def logistic_regression_score(self):
         pred = self.model.predict(self.X_test)
