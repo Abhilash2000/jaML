@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 from sklearn.metrics import r2_score, mean_squared_error
 
-class MainRegressor(object):
+class MainRegressors(object):
 
     def __init__(self, dataset, target, hypertune):
         self.dataset = dataset
