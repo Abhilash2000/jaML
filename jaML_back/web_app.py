@@ -270,8 +270,6 @@ class jaML_back(object):
                                         if st.button("Check Score"):
                                             st.text("Showing Accuracy Score")
                                             st.write(model_call.simple_linear_regression_score())
-                                        
-                                
                                     
                             
                             else:
