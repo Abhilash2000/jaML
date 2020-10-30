@@ -1,7 +1,6 @@
 import altair as alt
 import base64
 import pandas as pd
-import dask.dataframe as dd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
@@ -37,7 +36,7 @@ class jaML_back(object):
         if data == None:
             pass
         else:
-            df = st.cache(dd.read_csv)(data)
+            df = st.cache(pd.read_csv)(data)
 
             if page == 'Homepage':
                 st.sidebar.title('Uploaded Wrong File?')
