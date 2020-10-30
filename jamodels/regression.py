@@ -22,8 +22,8 @@ class MainRegressors(object):
         self.hypertune = hypertune
 
     def splitting(self):
-        X = dataset[self.features]
-        y = dataset[self.target]
+        X = self.dataset[self.features]
+        y = self.dataset[self.target]
 
         self.X_train, self.y_train, self.X_test, self.y_test = train_test_split(X, y, 
                                                             test_size = 0.33, 
