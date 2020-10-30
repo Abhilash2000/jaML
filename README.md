@@ -4,7 +4,7 @@
 
 - Abhilash V
 - Manali Tanna
-- Janavi Srinivasan
+- Janavi S
 
 ## Abstract
 
