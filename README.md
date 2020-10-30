@@ -15,5 +15,11 @@ Here is the system architecture of our application -
 
 ![System Architecture jaML](https://github.com/Abhilash2000/jaML/blob/main/Sys_Arc.png?raw=true)
 
+## Team Members
+
+- Abhilash V
+- Manali Tanna
+- Janavi Srinivasan
+
 ## Code Still In Development
 ### Instructions Will Be Provided On Completion
