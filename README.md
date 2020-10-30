@@ -13,8 +13,7 @@ Sounds far fetched? We have a **Proof-Of-Concept** ready for the basic tasks of 
 
 Here is th4e system architecture of our application -
 
-![System Architecture jaML]
-(https://drive.google.com/file/d/1QZ2rIwU4EX98XUZ9GuUwNdW3OrFYRQZb/view?usp=sharing)
+![System Architecture jaML](https://drive.google.com/file/d/1QZ2rIwU4EX98XUZ9GuUwNdW3OrFYRQZb/view?usp=sharing)
 
 ## Code Still In Development
 ### Instructions Will Be Provided On Completion
