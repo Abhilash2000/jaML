@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import random as rd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.tree import DecisionTreeRegressor
@@ -9,7 +10,7 @@ from sklearn.metrics import r2_score, mean_squared_error
 
 class MainRegressors(object):
 
-    def __init__(self, dataset, target, hypertune,kind):
+    def __init__(self, dataset, target, hypertune, kind):
         self.dataset = dataset
         self.target = target
         self.features = [i for i in list(dataset.columns) if i!= target]
@@ -69,8 +70,34 @@ class MainRegressors(object):
     def decision_tree(self):
         self.splitting()
 
-        self.model = DecisionTreeRegressor()
-        self.model.fit(self.X_train, self.y_train)
+        if self.hypertune == 'No':
+            self.model = DecisionTreeRegressor()
+            self.model.fit(self.X_train, self.y_train)
+        else:
+            param_grid = {'criterion': ["mse", "mae"],
+                          'min_samples_split': [10, 20, 40],
+                          'max_depth': [2, 6, 8],
+                          'min_samples_leaf': [20, 40, 100],
+                          'max_leaf_nodes': [5, 20, 100],
+                            }
+
+            if self.kind == 'GridSearchCV':
+                self.model = GridSearchCV(DecisionTreeRegressor(), 
+                                          param_grid, 
+                                          cv = 5, 
+                                          verbose = 0
+                                          )
+
+                self.model.fit(self.X_train, self.y_train)
+            
+            else:
+                self.model = RandomizedSearchCV(DecisionTreeRegressor(), 
+                                                param_grid, 
+                                                cv = 5, 
+                                                verbose = 0
+                                                )
+
+                self.model.fit(self.X_train, self.y_train)
 
     def decision_tree_score(self):
         pred = self.model.predict(self.X_test)
@@ -79,8 +106,33 @@ class MainRegressors(object):
     def random_forest(self):
         self.splitting()
 
-        self.model = RandomForestRegressor()
-        self.model.fit(self.X_train, self.y_train)
+        if self.hypertune == 'No':
+            self.model = RandomForestRegressor()
+            self.model.fit(self.X_train, self.y_train)
+        else:
+            param_grid = {'max_depth': [3, None],
+                          'max_features': rd.randint(1, self.X_train.shape[1]),
+                          'min_samples_split': rd.randint(2, 11),
+                          'bootstrap': [True, False],
+                          'n_estimators': rd.randint(100, 500)
+                        }
+            if self.kind == 'GridSearchCV':
+                self.model = GridSearchCV(RandomForestRegressor(), 
+                                          param_grid, 
+                                          cv = 5, 
+                                          verbose = 0
+                                          )
+
+                self.model.fit(self.X_train, self.y_train)
+            
+            else:
+                self.model = RandomizedSearchCV(RandomForestRegressor(), 
+                                                param_grid, 
+                                                cv = 5, 
+                                                verbose = 0
+                                                )
+
+                self.model.fit(self.X_train, self.y_train)
 
     def random_forest_score(self):
         pred = self.model.predict(self.X_test)
