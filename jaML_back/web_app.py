@@ -236,7 +236,7 @@ class jaML_back(object):
                                             st.write(model_call.decision_tree_classifier_score())
 
                                     elif model == 'Random Forest Classifier':
-                                        model_call.random_forest_classifier
+                                        model_call.random_forest_classifier()
                                         st.write("")
                                         st.write("Model Training Complete!")
                                         st.write("")
@@ -248,6 +248,43 @@ class jaML_back(object):
                                 except:
                                     st.write("")
                                     st.write("Something Went Wrong..Check Train Data and Try Again!")
+
+                        else:
+                            lin_type = st.selectbox("What Kind Of Linear Regression?",
+                                                ["Simple Linear Regression", "Multi-Linear Regression"],
+                                                index = 0)
+                            
+                            if lin_type == 'Simple Linear Regression':
+                                single_feat = st.selectbox("Which Column Do You Want As Feature?",
+                                                df.drop(target, axis = 1).columns,
+                                                index = 0)
+
+
+                                if st.button("Train Model"):
+                                    try:
+                                        model_call.simple_linear_regression(single_feat)
+                                        st.write("")
+                                        st.write("Model Training Complete!")
+                                        st.write("")
+
+                                        if st.button("Check Score"):
+                                            st.text("Showing Accuracy Score")
+                                            st.write(model_call.simple_linear_regression_score())
+                                        
+                                
+                                    
+                            
+                            else:
+                                if st.button("Train Model"):
+                                    try:
+                                        model_call.multi_linear_regression()
+                                        st.write("")
+                                        st.write("Model Training Complete!")
+                                        st.write("")
+
+                                        if st.button("Check Score"):
+                                            st.text("Showing Accuracy Score")
+                                            st.write(model_call.simple_linear_regression_score())
 
 
             elif page == 'Prediction':

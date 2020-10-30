@@ -33,15 +33,26 @@ class MainRegressors(object):
                                                             random_state = 101
                                                             )
 
-    
+    def simple_linear_regression(self, feat):
+        X = np.array(self.dataset[feat])
+        y = np.array(self.dataset[self.target])
 
-    def linear_regression(self):
+        self.model = LinearRegression()
+        self.model.fit(X, y)
+
+
+    def simple_linear_regression_score(self):
+        pred = self.model.predict(self.X_test)
+        return accuracy_score(self.y_test, pred)
+
+
+    def multi_linear_regression(self):
         self.splitting()
 
         self.model = LinearRegression()
         self.model.fit(self.X_train, self.y_train)
 
-    def linear_regression_score(self):
+    def multi_linear_regression_score(self):
         pred = self.model.predict(self.X_test)
         return (mean_squared_error(self.y_test, pred), r2_score(self.y_test, pred))
 
