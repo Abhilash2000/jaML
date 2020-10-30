@@ -184,11 +184,13 @@ class jaML_back(object):
 
                 st.title("Model Training")
                 st.subheader("Here You Can Train A Model On Uploaded Train Data-Set")
-                display = st.selectbox("Choose What Type Of Training You Want To Do", 
+                type_train = st.selectbox("Choose What Type Of Training You Want To Do", 
                                         ['Classification', 'Regression'],
                                         index = 0)
 
-                if display == 'Classification':
+                if type_train == 'Classification':
+
+                    
                     model = st.selectbox("Choose The Algorithm", 
                                         ['Linear Regression', 'Logistic Regression', 'Decision Tree Classifier', 'Random Forest Classifier'],
                                         index = 0)
@@ -196,6 +198,8 @@ class jaML_back(object):
                     target = st.selectbox("Select Target Column", 
                                           df.columns,
                                           index = len(df.columns)-1)
+
+                    
 
                     if model != 'Linear Regression': 
                         hypertune = st.selectbox("Do You Want To Hyper Tune The Model?", 
@@ -206,6 +210,45 @@ class jaML_back(object):
                             kind = st.selectbox("What Kind Of Hyper Tuning?", 
                                                 ['RandomizedSearchCV', 'GridSearchCV'],
                                                 index = 1)
+    
+                            model_call = MainClassifiers(df, target, hypertune, kind)
+
+                            if st.button("Train Model"):
+                                try:
+                                    if model == 'Logistic Regression':
+                                        model_call.logistic_regression()
+                                        st.write("")
+                                        st.write("Model Training Complete!")
+                                        st.write("")
+
+                                        if st.button("Check Score"):
+                                            st.text("Showing Accuracy Score")
+                                            st.write(model_call.logistic_regression_score())
+                                        
+                                    elif model == 'Decision Tree Classifier':
+                                        model_call.decision_tree_classifier()
+                                        st.write("")
+                                        st.write("Model Training Complete!")
+                                        st.write("")
+
+                                        if st.button("Check Score"):
+                                            st.text("Showing Accuracy Score")
+                                            st.write(model_call.decision_tree_classifier_score())
+
+                                    elif model == 'Random Forest Classifier':
+                                        model_call.random_forest_classifier
+                                        st.write("")
+                                        st.write("Model Training Complete!")
+                                        st.write("")
+
+                                        if st.button("Check Score"):
+                                            st.text("Showing Accuracy Score")
+                                            st.write(model_call.random_forest_classifier_score())
+
+                                except:
+                                    st.write("")
+                                    st.write("Something Went Wrong..Check Train Data and Try Again!")
+
 
             elif page == 'Prediction':
                 data = st.file_uploader('Upload Your Test Dataset', type = 'csv', key = 'Test')
