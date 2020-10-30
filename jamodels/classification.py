@@ -118,8 +118,35 @@ class MainClassifiers(object):
     def random_forest_classifier(self):
         self.splitting()
 
-        self.model = LogisticRegression()
-        self.model.fit(self.X_train, self.y_train)
+        if hypertune == 'No':
+            self.model = DecisionTreeClassifier()
+            self.model.fit(self.X_train, self.y_train)
+        else:
+            param_grid = {'bootstrap': [True, False],
+                          'max_depth': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, None],
+                          'max_features': ['auto', 'sqrt'],
+                          'min_samples_leaf': [1, 2, 4],
+                          'min_samples_split': [2, 5, 10],
+                          'n_estimators': [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000]
+                          }
+
+            if self.kind == 'GridSearchCV':
+                self.model = GridSearchCV(RandomForestClassifier(), 
+                                          param_grid, 
+                                          cv = 5, 
+                                          verbose = 0
+                                          )
+
+                self.model.fit(self.X_train, self.y_train)
+            
+            else:
+                self.model = RandomizedSearchCV(RandomForestClassifier(), 
+                                                param_grid, 
+                                                cv = 5, 
+                                                verbose = 0
+                                                )
+
+                self.model.fit(self.X_train, self.y_train)
 
     def random_forest_classifier_score(self):
         pred = self.model.predict(self.X_test)
