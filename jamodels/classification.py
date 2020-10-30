@@ -41,8 +41,8 @@ class MainClassifiers(object):
 
 
     def linear_regression_score(self):
-        pred = self.model.predict(X_test)
-        return accuracy_score(y_test, pred)
+        pred = self.model.predict(self.X_test)
+        return accuracy_score(self.y_test, pred)
 
     
     def logistic_regression(self):
@@ -74,8 +74,8 @@ class MainClassifiers(object):
                 self.model.fit(self.X_train, self.y_train)
 
     def logistic_regression_score(self):
-        pred = self.model.predict(X_test)
-        return accuracy_score(y_test, pred)
+        pred = self.model.predict(self.X_test)
+        return accuracy_score(self.y_test, pred)
 
 
     def decision_tree_classifier(self):
@@ -111,8 +111,8 @@ class MainClassifiers(object):
 
 
     def decision_tree_classifier_score(self):
-        pred = self.model.predict(X_test)
-        return accuracy_score(y_test, pred)
+        pred = self.model.predict(self.X_test)
+        return accuracy_score(self.y_test, pred)
 
     
     def random_forest_classifier(self):
@@ -122,8 +122,8 @@ class MainClassifiers(object):
         self.model.fit(self.X_train, self.y_train)
 
     def random_forest_classifier_score(self):
-        pred = self.model.predict(X_test)
-        return accuracy_score(y_test, pred)
+        pred = self.model.predict(self.X_test)
+        return accuracy_score(self.y_test, pred)
 
         
 

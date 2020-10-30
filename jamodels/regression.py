@@ -39,8 +39,8 @@ class MainRegressors(object):
         self.model.fit(self.X_train, self.y_train)
 
     def linear_regression_score(self):
-        pred = self.model.predict(X_test)
-        return (mean_squared_error(y_test, pred), r2_score(y_test, pred))
+        pred = self.model.predict(self.X_test)
+        return (mean_squared_error(self.y_test, pred), r2_score(self.y_test, pred))
 
     
     def logistic_regression(self):
@@ -50,8 +50,8 @@ class MainRegressors(object):
         self.model.fit(self.X_train, self.y_train)
 
     def logistic_regression_score(self):
-        pred = self.model.predict(X_test)
-        return (mean_squared_error(y_test, pred), r2_score(y_test, pred))
+        pred = self.model.predict(self.X_test)
+        return (mean_squared_error(self.y_test, pred), r2_score(self.y_test, pred))
 
     def decision_tree(self):
         self.splitting()
@@ -60,8 +60,8 @@ class MainRegressors(object):
         self.model.fit(self.X_train, self.y_train)
 
     def decision_tree_score(self):
-        pred = self.model.predict(X_test)
-        return (mean_squared_error(y_test, pred), r2_score(y_test, pred))
+        pred = self.model.predict(self.X_test)
+        return (mean_squared_error(self.y_test, pred), r2_score(self.y_test, pred))
 
     def random_forest(self):
         self.splitting()
@@ -70,5 +70,5 @@ class MainRegressors(object):
         self.model.fit(self.X_train, self.y_train)
 
     def random_forest_score(self):
-        pred = self.model.predict(X_test)
-        return (mean_squared_error(y_test, pred), r2_score(y_test, pred))
+        pred = self.model.predict(self.X_test)
+        return (mean_squared_error(self.y_test, pred), r2_score(self.y_test, pred))
