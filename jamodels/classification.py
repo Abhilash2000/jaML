@@ -83,7 +83,7 @@ class MainClassifiers(object):
     def decision_tree_classifier(self):
         self.splitting()
 
-        if hypertune == 'No':
+        if self.hypertune == 'No':
             self.model = DecisionTreeClassifier()
             self.model.fit(self.X_train, self.y_train)
         else:
@@ -120,7 +120,7 @@ class MainClassifiers(object):
     def random_forest_classifier(self):
         self.splitting()
 
-        if hypertune == 'No':
+        if self.hypertune == 'No':
             self.model = DecisionTreeClassifier()
             self.model.fit(self.X_train, self.y_train)
         else:
