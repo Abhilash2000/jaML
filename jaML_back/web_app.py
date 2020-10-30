@@ -271,6 +271,10 @@ class jaML_back(object):
                                         st.text("Showing Accuracy Score")
                                         st.write(model_call.simple_linear_regression_score())
                                 
+                                except:
+                                    st.write("")
+                                    st.write("Something Went Wrong..Check Train Data and Try Again!")
+                                
                         
                         else:
                             if st.button("Train Model"):
@@ -283,6 +287,11 @@ class jaML_back(object):
                                     if st.button("Check Score"):
                                         st.text("Showing Accuracy Score")
                                         st.write(model_call.simple_linear_regression_score())
+                                
+                                except:
+                                    st.write("")
+                                    st.write("Something Went Wrong..Check Train Data and Try Again!")
+
 
                 else:
                     model = st.selectbox("Choose The Algorithm", 
@@ -365,6 +374,10 @@ class jaML_back(object):
                                             st.text("Showing Accuracy Score")
                                             st.write(model_call.simple_linear_regression_score())
                                     
+                                    except:
+                                        st.write("")
+                                        st.write("Something Went Wrong..Check Train Data and Try Again!")
+                                        
                             
                             else:
                                 if st.button("Train Model"):
@@ -377,6 +390,10 @@ class jaML_back(object):
                                         if st.button("Check Score"):
                                             st.text("Showing Accuracy Score")
                                             st.write(model_call.simple_linear_regression_score())
+
+                                    except:
+                                        st.write("")
+                                        st.write("Something Went Wrong..Check Train Data and Try Again!")
 
 
             elif page == 'Prediction':
