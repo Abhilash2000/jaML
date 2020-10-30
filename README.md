@@ -11,7 +11,7 @@ What’s the catch though? **NOTHING!** Moreover, we have made it **open-source*
 
 Sounds far fetched? We have a **Proof-Of-Concept** ready for the basic tasks of our web application.
 
-Here is th4e system architecture of our application -
+Here is the system architecture of our application -
 
 ![System Architecture jaML](https://github.com/Abhilash2000/jaML/blob/main/Sys_Arc.png?raw=true)
 
