@@ -207,7 +207,7 @@ class jaML_back(object):
                                                 ['RandomizedSearchCV', 'GridSearchCV'],
                                                 index = 1)
 
-            elif page == 'Test CSV Prediction':
+            elif page == 'Prediction':
                 data = st.file_uploader('Upload Your Test Dataset', type = 'csv', key = 'Test')
 
                 if data == None:
