@@ -30,5 +30,20 @@ Here is the system architecture of our application -
 - For version control and maintenance, we will be using **Git (Gitkraken)**. 
 - Code will be pushed from **Gitkraken to Github** on frequent commits
 
-## Code Still In Development
-### Instructions Will Be Provided On Completion
+## Instructions To Run Code
+
+1. Clone Repo and Change Into Cloned Directory
+
+2. Install Required Dependencies
+
+```
+pip install -r requirements.txt
+```
+
+3. Run The Web Application
+
+```
+streamlit run jaML.py
+```
+
+### NOTE: We Will Deploy The Web Application On Streamlit Deployment Platform On Final Release
