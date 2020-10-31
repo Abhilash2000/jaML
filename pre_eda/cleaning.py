@@ -9,11 +9,17 @@ class Prep(object):
     '''
         Still In The Works!
     '''
+
     def __init__(self, data):
         self.data = data
 
-    def remove_nan(self):
-        pass
+    def remove_nan(self, how):
+        if how == 'Rows':
+            self.data.dropna()
+            self.data = self.data.reset_index(drop = True)
+
+        else:
+            self.data.dropna(axis = 1)
 
     def replace_nan(self):
         pass
