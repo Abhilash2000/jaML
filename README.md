@@ -46,4 +46,4 @@ pip install -r requirements.txt
 streamlit run jaML.py
 ```
 
-### NOTE: We Will Deploy The Web Application On Streamlit Deployment Platform On Final Release
+In case you do not want to run through the above procedures to test on localhost, you can check out the Prototype Web Application Deployed at https://share.streamlit.io/abhilash2000/jaml/main/jaML.py
