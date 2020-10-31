@@ -23,7 +23,7 @@ class jaML_back(object):
     def get_csv_download_link(self, df):
         csv = df.to_csv(index=False)
         b64 = base64.b64encode(csv.encode()).decode()
-        href = f'<a href = "data:file/csv;base64,{b64}" download="Transformed_Data.csv">Download Transformed Data</a>'
+        href = f'<a href = "data:file/csv;base64,{b64}" download="Preprocessed_Data.csv">Download Preprocessed Data</a>'
         return href
 
 
