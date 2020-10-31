@@ -6,6 +6,7 @@ import seaborn as sns
 import streamlit as st
 
 from pre_eda.visualize import Visualize
+from pre_eda.cleaning import Prep
 from jamodels.classification import MainClassifiers
 from jamodels.regression import MainRegressors
 
@@ -30,7 +31,7 @@ class jaML_back(object):
         st.markdown(self.hide_menu_style, unsafe_allow_html=True)
         
         st.sidebar.title('Sections')
-        page = st.sidebar.radio("Go To Page",['Homepage', 'Data View', 'EDA', 'Model Training', 'Test CSV Prediction'])
+        page = st.sidebar.radio("Go To Page",['Homepage', 'Data View', 'EDA', 'Clean Data', 'Model Training', 'Predict'])
         data = st.file_uploader('Upload Your Dataset', type = 'csv', key = 'Train')
 
         if data == None:
@@ -43,8 +44,8 @@ class jaML_back(object):
                 st.sidebar.info("You Will Have To Refresh The Page To Re-Upload")
 
                 st.title("Welcome To The jaML App!")
-                st.write("The Purpose Of This App Is To Simplify The EDA Process With Just The Click Of The Mouse.")
-                st.write("The jaML App Has A Lot Of Features That Can Be Used For EDA.")
+                st.write("The Purpose Of This App Is To Automate The Data Science and ML Processes With Just The Click Of A Button.")
+                st.write("The jaML App Has A Lot Of Features!")
 
                 st.subheader("View Your Original Data") 
                 st.write("")
@@ -71,6 +72,17 @@ class jaML_back(object):
                 st.write("")
                 st.write("")
 
+                st.subheader("You Can Clean Your Data")
+                st.write("")
+                st.write("The Different Types Of Pre-Processing You Can Do Are - ")
+                st.write("1. Remove/Replace NaN Values")
+                st.write("2. Encoding Categorical Columns")
+                st.write("3. PCA")
+                st.write("4. Normalize")
+                st.write("5. Standardize")
+                st.write("")
+                st.write("")
+
                 st.subheader("You Can Train Your Own ML Model")
                 st.write("")
                 st.write("The Different Types Of Models You Can Generate Are - ")
@@ -80,6 +92,11 @@ class jaML_back(object):
                 st.write("4. Random Forest Classifier/Regressor")
                 st.write("")
                 st.write("You Can, Also, Choose To Hyper Tune The Model")
+                st.write("")
+                st.write("")
+
+
+                st.subheader("You Can Use The Above Trained Model To Predict On Test Data")
                 st.write("")
                 st.write("")
 
@@ -177,6 +194,41 @@ class jaML_back(object):
                 elif type_of_plot == 'Distribution Plot':
                     x_axis = st.selectbox("Choose A Variable For X-Axis", df.columns, index = len(df.columns)-1)
                     viz.visualize_distribution(df, x_axis)
+            
+            elif page == 'Clean Data':
+                st.sidebar.title('What To Do?')
+                st.sidebar.info("You Can Clean And Save Your Cleaned Data Externally")
+
+                st.title("Cleaning Data")
+                st.subheader("Here You Can Clean The Uploaded Data-Set")
+
+                nan = st.selectbox("What Do You Want To Do With NaN Values?",
+                                   ['Remove', 'Replace'],
+                                   index = 0)
+                
+                if nan == 'Replace':
+                    stat = st.selectbox("With Which Statistical Value Do You Want To Replace?",
+                                        ['Mean', 'Median', 'Mode'],
+                                        index = 1)
+                else:
+                    how = st.selectbox("Remove Rows Or Columns?",
+                                        ['Rows', 'Columns'],
+                                        index = 0)
+                
+                encode = st.selectbox("Do You Want To Encode All Categorical Columns?",
+                                      ['Yes', 'No'],
+                                      index = 0)
+                
+                pca = st.selectbox("Do You Want To Reduce Dimension Using PCA?",
+                                   ['Yes', 'No'],
+                                   index = 1)
+                                
+                data_modif = st.selectbox("Do You Want To Normalize Or Standardize The Data?",
+                                          ['Normalize', 'Standardize', 'None'])
+
+                st.write("")
+                if st.button("Start Preprocessing"):
+                    pass
 
             elif page == 'Model Training':
                 st.sidebar.title('What To Do?')
@@ -212,11 +264,12 @@ class jaML_back(object):
                                                 index = 1)
     
                             model_call = MainClassifiers(df, target, hypertune, kind)
-
+                            st.write("")
                             if st.button("Train Model"):
                                 try:
                                     if model == 'Logistic Regression':
-                                        model_call.logistic_regression()
+                                        with st.spinner("Training Logistic Regression Model"):
+                                            model_call.logistic_regression()
                                         st.write("")
                                         st.write("Model Training Complete!")
                                         st.write("")
@@ -226,7 +279,8 @@ class jaML_back(object):
                                             st.write(model_call.logistic_regression_score())
                                         
                                     elif model == 'Decision Tree Classifier':
-                                        model_call.decision_tree_classifier()
+                                        with st.spinner("Training Decision Tree Model"):
+                                            model_call.decision_tree_classifier()
                                         st.write("")
                                         st.write("Model Training Complete!")
                                         st.write("")
@@ -236,7 +290,8 @@ class jaML_back(object):
                                             st.write(model_call.decision_tree_classifier_score())
 
                                     elif model == 'Random Forest Classifier':
-                                        model_call.random_forest_classifier()
+                                        with st.spinner("Training Random Forest Model"):
+                                            model_call.random_forest_classifier()
                                         st.write("")
                                         st.write("Model Training Complete!")
                                         st.write("")
@@ -259,10 +314,11 @@ class jaML_back(object):
                                                     df.drop(target, axis = 1).columns,
                                                     index = 0)
 
-
+                            st.write("")
                             if st.button("Train Model"):
                                 try:
-                                    model_call.simple_linear_regression(single_feat)
+                                    with st.spinner("Training Simple Linear Regression Model"):
+                                        model_call.simple_linear_regression(single_feat)
                                     st.write("")
                                     st.write("Model Training Complete!")
                                     st.write("")
@@ -277,9 +333,11 @@ class jaML_back(object):
                                 
                         
                         else:
+                            st.write("")
                             if st.button("Train Model"):
                                 try:
-                                    model_call.multi_linear_regression()
+                                    with st.spinner("Training Multi Linear Regression Model"):
+                                        model_call.multi_linear_regression()
                                     st.write("")
                                     st.write("Model Training Complete!")
                                     st.write("")
@@ -316,6 +374,7 @@ class jaML_back(object):
     
                             model_call = MainRegressors(df, target, hypertune, kind)
 
+                            st.write("")
                             if st.button("Train Model"):
                                 try:
                                     if model == 'Logistic Regression':
@@ -362,7 +421,7 @@ class jaML_back(object):
                                                 df.drop(target, axis = 1).columns,
                                                 index = 0)
 
-
+                                st.write("")
                                 if st.button("Train Model"):
                                     try:
                                         model_call.simple_linear_regression(single_feat)
@@ -380,6 +439,7 @@ class jaML_back(object):
                                         
                             
                             else:
+                                st.write("")
                                 if st.button("Train Model"):
                                     try:
                                         model_call.multi_linear_regression()
@@ -396,7 +456,7 @@ class jaML_back(object):
                                         st.write("Something Went Wrong..Check Train Data and Try Again!")
 
 
-            elif page == 'Prediction':
+            elif page == 'Predict':
                 data = st.file_uploader('Upload Your Test Dataset', type = 'csv', key = 'Test')
 
                 if data == None:
