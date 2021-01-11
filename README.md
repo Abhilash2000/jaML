@@ -1,11 +1,5 @@
 # jaML
 
-## Team JAM Members
-
-- Abhilash V
-- Manali Tanna
-- Janavi S
-
 ## Abstract
 
 “Ughh! I want to work on data science and machine learning, but I don’t know how to code!!” Have you ever been in such a situation? I know we have! 
